@@ -21,13 +21,40 @@
 			remoteGlobalIDString = 77C0F82C2E7B2BCA00722B25;
 			remoteInfo = "Pomodoro Screen Timer";
 		};
+		77C0F8722E7B2BE000722B25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77C0F8252E7B2BCA00722B25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77C0F85F2E7B2BDF00722B25;
+			remoteInfo = LoginItemHelper;
+		};
+		77C0F87C2E7B2BE000722B25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 77C0F8252E7B2BCA00722B25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 77C0F85F2E7B2BDF00722B25;
+			remoteInfo = LoginItemHelper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		77C0F82D2E7B2BCA00722B25 /* Pomodoro Screen Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Screen Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C0F83F2E7B2BCB00722B25 /* Pomodoro Screen TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro Screen TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C0F8492E7B2BCB00722B25 /* Pomodoro Screen TimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro Screen TimerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77C0F8602E7B2BDF00722B25 /* LoginItemHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginItemHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77C0F8712E7B2BE000722B25 /* LoginItemHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginItemHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77C0F87B2E7B2BE000722B25 /* LoginItemHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginItemHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		77D080852E7F08D3008F8077 /* Exceptions for "LoginItemHelper" folder in "LoginItemHelper" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		77C0F82F2E7B2BCA00722B25 /* Pomodoro Screen Timer */ = {
@@ -43,6 +70,24 @@
 		77C0F84C2E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Pomodoro Screen TimerUITests";
+			sourceTree = "<group>";
+		};
+		77C0F8612E7B2BDF00722B25 /* LoginItemHelper */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				77D080852E7F08D3008F8077 /* Exceptions for "LoginItemHelper" folder in "LoginItemHelper" target */,
+			);
+			path = LoginItemHelper;
+			sourceTree = "<group>";
+		};
+		77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LoginItemHelperTests;
+			sourceTree = "<group>";
+		};
+		77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LoginItemHelperUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +114,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77C0F85D2E7B2BDF00722B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F86E2E7B2BE000722B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F8782E7B2BE000722B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +144,9 @@
 				77C0F82F2E7B2BCA00722B25 /* Pomodoro Screen Timer */,
 				77C0F8422E7B2BCB00722B25 /* Pomodoro Screen TimerTests */,
 				77C0F84C2E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */,
+				77C0F8612E7B2BDF00722B25 /* LoginItemHelper */,
+				77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */,
+				77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */,
 				77C0F82E2E7B2BCA00722B25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +157,9 @@
 				77C0F82D2E7B2BCA00722B25 /* Pomodoro Screen Timer.app */,
 				77C0F83F2E7B2BCB00722B25 /* Pomodoro Screen TimerTests.xctest */,
 				77C0F8492E7B2BCB00722B25 /* Pomodoro Screen TimerUITests.xctest */,
+				77C0F8602E7B2BDF00722B25 /* LoginItemHelper.app */,
+				77C0F8712E7B2BE000722B25 /* LoginItemHelperTests.xctest */,
+				77C0F87B2E7B2BE000722B25 /* LoginItemHelperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +235,74 @@
 			productReference = 77C0F8492E7B2BCB00722B25 /* Pomodoro Screen TimerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77C0F8832E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelper" */;
+			buildPhases = (
+				77C0F85C2E7B2BDF00722B25 /* Sources */,
+				77C0F85D2E7B2BDF00722B25 /* Frameworks */,
+				77C0F85E2E7B2BDF00722B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				77C0F8612E7B2BDF00722B25 /* LoginItemHelper */,
+			);
+			name = LoginItemHelper;
+			packageProductDependencies = (
+			);
+			productName = LoginItemHelper;
+			productReference = 77C0F8602E7B2BDF00722B25 /* LoginItemHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		77C0F8702E7B2BE000722B25 /* LoginItemHelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77C0F8862E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelperTests" */;
+			buildPhases = (
+				77C0F86D2E7B2BE000722B25 /* Sources */,
+				77C0F86E2E7B2BE000722B25 /* Frameworks */,
+				77C0F86F2E7B2BE000722B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				77C0F8732E7B2BE000722B25 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */,
+			);
+			name = LoginItemHelperTests;
+			packageProductDependencies = (
+			);
+			productName = LoginItemHelperTests;
+			productReference = 77C0F8712E7B2BE000722B25 /* LoginItemHelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		77C0F87A2E7B2BE000722B25 /* LoginItemHelperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77C0F8892E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelperUITests" */;
+			buildPhases = (
+				77C0F8772E7B2BE000722B25 /* Sources */,
+				77C0F8782E7B2BE000722B25 /* Frameworks */,
+				77C0F8792E7B2BE000722B25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				77C0F87D2E7B2BE000722B25 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */,
+			);
+			name = LoginItemHelperUITests;
+			packageProductDependencies = (
+			);
+			productName = LoginItemHelperUITests;
+			productReference = 77C0F87B2E7B2BE000722B25 /* LoginItemHelperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +324,17 @@
 						CreatedOnToolsVersion = 26.0;
 						TestTargetID = 77C0F82C2E7B2BCA00722B25;
 					};
+					77C0F85F2E7B2BDF00722B25 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					77C0F8702E7B2BE000722B25 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 77C0F85F2E7B2BDF00722B25;
+					};
+					77C0F87A2E7B2BE000722B25 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 77C0F85F2E7B2BDF00722B25;
+					};
 				};
 			};
 			buildConfigurationList = 77C0F8282E7B2BCA00722B25 /* Build configuration list for PBXProject "Pomodoro Screen Timer" */;
@@ -203,6 +354,9 @@
 				77C0F82C2E7B2BCA00722B25 /* Pomodoro Screen Timer */,
 				77C0F83E2E7B2BCB00722B25 /* Pomodoro Screen TimerTests */,
 				77C0F8482E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */,
+				77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */,
+				77C0F8702E7B2BE000722B25 /* LoginItemHelperTests */,
+				77C0F87A2E7B2BE000722B25 /* LoginItemHelperUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +377,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		77C0F8472E7B2BCB00722B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F85E2E7B2BDF00722B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F86F2E7B2BE000722B25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F8792E7B2BE000722B25 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +428,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		77C0F85C2E7B2BDF00722B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F86D2E7B2BE000722B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		77C0F8772E7B2BE000722B25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +461,16 @@
 			isa = PBXTargetDependency;
 			target = 77C0F82C2E7B2BCA00722B25 /* Pomodoro Screen Timer */;
 			targetProxy = 77C0F84A2E7B2BCB00722B25 /* PBXContainerItemProxy */;
+		};
+		77C0F8732E7B2BE000722B25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */;
+			targetProxy = 77C0F8722E7B2BE000722B25 /* PBXContainerItemProxy */;
+		};
+		77C0F87D2E7B2BE000722B25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */;
+			targetProxy = 77C0F87C2E7B2BE000722B25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -403,6 +609,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -435,6 +642,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -533,6 +741,154 @@
 			};
 			name = Release;
 		};
+		77C0F8842E7B2BE000722B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LoginItemHelper/Info.plist;
+				INFOPLIST_KEY_LSBackgroundOnly = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		77C0F8852E7B2BE000722B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LoginItemHelper/Info.plist;
+				INFOPLIST_KEY_LSBackgroundOnly = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		77C0F8872E7B2BE000722B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginItemHelper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoginItemHelper";
+			};
+			name = Debug;
+		};
+		77C0F8882E7B2BE000722B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoginItemHelper.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoginItemHelper";
+			};
+			name = Release;
+		};
+		77C0F88A2E7B2BE000722B25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = LoginItemHelper;
+			};
+			name = Debug;
+		};
+		77C0F88B2E7B2BE000722B25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4437J3J692;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = PomodoroScreenTimer.LoginItemHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = LoginItemHelper;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -568,6 +924,33 @@
 			buildConfigurations = (
 				77C0F85A2E7B2BCB00722B25 /* Debug */,
 				77C0F85B2E7B2BCB00722B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77C0F8832E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77C0F8842E7B2BE000722B25 /* Debug */,
+				77C0F8852E7B2BE000722B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77C0F8862E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77C0F8872E7B2BE000722B25 /* Debug */,
+				77C0F8882E7B2BE000722B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77C0F8892E7B2BE000722B25 /* Build configuration list for PBXNativeTarget "LoginItemHelperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77C0F88A2E7B2BE000722B25 /* Debug */,
+				77C0F88B2E7B2BE000722B25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

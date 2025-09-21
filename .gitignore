@@ -1,0 +1,21 @@
+# macOS / Finder
+.DS_Store
+
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# SwiftPM
+.build/
+
+# Signing artifacts
+*.p12
+*.cer
+*.mobileprovision

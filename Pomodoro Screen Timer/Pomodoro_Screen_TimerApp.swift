@@ -2,20 +2,61 @@
 //  Pomodoro_Screen_TimerApp.swift
 //  Pomodoro Screen Timer
 //
-//  Created by Mia on 9/17/25.
+//  Created by Mia on 9/16/25.
 //
 
 import SwiftUI
-import CoreData
+import AppKit
 
 @main
 struct Pomodoro_Screen_TimerApp: App {
-    let persistenceController = PersistenceController.shared
-
+    @StateObject private var settings: SettingsStore
+    @StateObject private var model: TimerModel
+    
+    init() {
+        let s = SettingsStore()
+        _settings = StateObject(wrappedValue: s)
+        _model    = StateObject(wrappedValue: TimerModel(settings: s))
+        DispatchQueue.main.async { NSApp.setActivationPolicy(.accessory) } // menu-bar–only app
+    }
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        // Native menubar (real NSMenu items with .menu style)
+        MenuBarExtra {
+            MenuBarView()
+                .environmentObject(settings)
+                .environmentObject(model)
+        } label: {
+            MenuBarStatusLabel().environmentObject(model)
+        }
+        .menuBarExtraStyle(.menu)
+        
+        // SINGLE main window (singleton)
+        Window("Pomodoro Screen Timer", id: "main") {
+            MainView()
+                .environmentObject(settings)
+                .environmentObject(model)
+        }
+        .defaultSize(width: 520, height: 560)
+        .windowStyle(.titleBar)
+        .windowToolbarStyle(.unified)
+        
+        Settings {
+            SettingsView()
+                .environmentObject(settings)
+                .environmentObject(model)
         }
     }
+}
+
+// handy local helper
+private func timeString(_ seconds: Int) -> String {
+    String(format: "%02d:%02d", seconds / 60, seconds % 60)
+}
+
+// requires AppKit
+private func statusTextWidth(template: String = "360:00",
+                             font: NSFont = .monospacedSystemFont(ofSize: 12, weight: .medium)) -> CGFloat {
+    let w = (template as NSString).size(withAttributes: [.font: font]).width
+    return ceil(w) + 8  // padding so it doesn't feel cramped
 }

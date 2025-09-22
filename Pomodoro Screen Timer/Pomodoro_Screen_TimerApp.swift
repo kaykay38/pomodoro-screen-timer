@@ -49,11 +49,6 @@ struct Pomodoro_Screen_TimerApp: App {
     }
 }
 
-// handy local helper
-private func timeString(_ seconds: Int) -> String {
-    String(format: "%02d:%02d", seconds / 60, seconds % 60)
-}
-
 // requires AppKit
 private func statusTextWidth(template: String = "360:00",
                              font: NSFont = .monospacedSystemFont(ofSize: 12, weight: .medium)) -> CGFloat {

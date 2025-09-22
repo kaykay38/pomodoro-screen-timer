@@ -7,25 +7,17 @@
 import ServiceManagement
 
 enum LoginItemManager {
-    /// MUST exactly match the helper target’s Bundle Identifier in its Info.plist
-    static let helperID = "PomodoroScreenTimer.LoginItemHelper"
+    // EXACT helper bundle id
+    static let helperID = "PomodoroScreenTimer.Pomodoro-Screen-Timer.LoginItemHelper"
 
     static var isEnabled: Bool {
-        if #available(macOS 13, *) {
-            SMAppService.loginItem(identifier: helperID).status == .enabled
-        } else {
-            // for Monterey support, you can reflect a cached user pref here instead
-            false
-        }
+        guard #available(macOS 13, *) else { return false }
+        return SMAppService.loginItem(identifier: helperID).status == .enabled
     }
 
     static func set(enabled: Bool) throws {
-        guard #available(macOS 13, *) else {
-            // If supporting 12.x, use SMLoginItemSetEnabled(helperID as CFString, enabled) here.
-            return
-        }
+        guard #available(macOS 13, *) else { return }
         let svc = SMAppService.loginItem(identifier: helperID)
-
         do {
             if enabled {
                 if svc.status != .enabled {
@@ -37,9 +29,8 @@ enum LoginItemManager {
                 }
             }
         } catch {
-            // Common benign cases:
-            // - SMError.alreadyRegistered
-            // - SMError.notFound
+            // Surface for logging
+            NSLog("LoginItem register/unregister failed: \(String(describing: error))")
             throw error
         }
     }

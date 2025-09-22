@@ -70,15 +70,15 @@ struct SettingsView: View {
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            #if DEBUG
-            GroupBox {
-                Toggle("Test mode: treat minutes as seconds", isOn: $settings.devTreatMinutesAsSeconds)
-                    .tint(.pink)
-                Text("When ON, 25 min runs for 25 sec. Great for quick end-of-interval testing.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-            #endif
+//            #if DEBUG
+//            GroupBox {
+//                Toggle("Test mode: treat minutes as seconds", isOn: $settings.devTreatMinutesAsSeconds)
+//                    .tint(.pink)
+//                Text("When ON, 25 min runs for 25 sec. Great for quick end-of-interval testing.")
+//                    .font(.footnote)
+//                    .foregroundStyle(.secondary)
+//            }
+//            #endif
 
             GroupBox {
                 Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
@@ -473,6 +473,10 @@ struct SettingsView: View {
 
             GroupBox {
                 Toggle("Launch at login", isOn: $settings.launchAtLogin)
+                    .onChange(of: settings.launchAtLogin) { oldValue, newValue in
+                        settings.applyLaunchAtLogin(newValue)
+                        print("[DEBUG] Launch at login: \(newValue)")
+                    }
             }
         }
     }

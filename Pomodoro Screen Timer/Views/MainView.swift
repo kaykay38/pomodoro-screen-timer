@@ -32,7 +32,6 @@ struct MainView: View {
                 }
                 .pickerStyle(.segmented)
                 .frame(maxWidth: 300)
-//                .onChange(of: model.phase, initial: false) { oldValue, newValue in model.reset(for: newValue) }
                 
                 HStack(spacing: 10) {
                     Image(systemName: "clock").foregroundStyle(.secondary)

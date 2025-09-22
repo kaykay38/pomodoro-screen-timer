@@ -23,6 +23,7 @@ final class TimerModel: ObservableObject {
     let settings: SettingsStore
     private var timer: DispatchSourceTimer?
     
+    // test helper
     private func scaled(_ seconds: Int) -> Int {
         if settings.devTreatMinutesAsSeconds {
             // 1 minute typed -> 1 second of runtime

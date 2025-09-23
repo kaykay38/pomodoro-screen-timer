@@ -1,6 +1,37 @@
-# Pomodoro Screen Timer
+<p align="center">
+  <img src="./docs/icon/icon.png" alt="Pomodoro Screen Timer Icon" width="128"/>
+</p>
 
-A beautiful, native macOS Pomodoro timer that lives in your menu bar and helps you stay focused with customizable work and break sessions. The main feature of this pomodoro timer is that it creates a **visual disruption** for those who have become deaf to the monotony of alarms. The entire screen of all connected monitors will display an overlay to disrupt your current work.
+<h1 align="center">Pomodoro Screen Timer</h1>
+
+<p align="center">
+  ⏳ A beautiful, native macOS Pomodoro timer with full-screen visual disruptions
+</p>
+The main feature of this pomodoro timer is that it creates a **visual disruption** for those who have become deaf to the monotony of alarms. The entire screen of all connected monitors will display an overlay to disrupt your current work.
+
+## Table of Contents
+- [Screenshots](#screenshots)
+- [Demo](#demo)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Development](#development)
+- [License](#license)
+
+
+## Screenshots
+<p align="center">
+  <img src="./docs/screenshots/main_view.png" alt="Pomodoro Screen Timer Main View"/>
+  <img src="./docs/screenshots/menu_bar_menu.png" alt="Pomodoro Screen Timer Menu Bar"/>
+  <img src="./docs/screenshots/settings.png" alt="Pomodoro Screen Timer Settings"/>
+</p>
+
+
+## Demo
+<p align="center">
+<video src="./docs/demo/demo.mp4" width="720" controls></video>
+</p>
 
 ## Features
 
@@ -13,7 +44,7 @@ A beautiful, native macOS Pomodoro timer that lives in your menu bar and helps y
 - **Manual Control**: Option to manually start each session.
 
 ### Visual & Audio
-- **Multi-monitor Full-Scrren Overlays**: Customizable break and focus overlays with images to visually disrupt your current work to signal a transition to a break or focus session.
+- **Multi-monitor Full-Screen Overlays**: Customizable break and focus overlays with images to visually disrupt your current work to signal a transition to a break or focus session.
 - **Phase-Specific Colors**: 🟢 Green for focus, 🔴 Red for breaks.
 - **Custom Sounds**: Set different alarm sounds for focus and break transitions.
 
@@ -28,14 +59,6 @@ A beautiful, native macOS Pomodoro timer that lives in your menu bar and helps y
 - **Debug Mode**: Treat minutes as seconds for faster testing.
 - **Clean Architecture**: Well-organized codebase with separate models, views, and controllers.
 - **SwiftUI + AppKit**: Modern SwiftUI interface with AppKit integration for menu bar functionality.
-
-## Screenshots
-[![Demo Video](./docs/demo/demo.mp4)](./docs/demo/demo.mp4)
-![Main View](./docs/screenshots/main_view.png)
-![Menu Bar Menu](./docs/screenshots/menu_bar_menu.png)
-![Settings](./docs/screenshots/settings.png)
-
-
 
 ## Requirements
 
@@ -162,18 +185,6 @@ The codebase follows Swift and SwiftUI best practices:
 - **Environment objects** for dependency injection.
 - **Combine** framework for reactive updates.
 - **Separation of concerns** between models, views, and controllers.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
-
-### Development Setup
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly (use debug mode for faster iteration)
-5. Submit a pull request
 
 ## License
 

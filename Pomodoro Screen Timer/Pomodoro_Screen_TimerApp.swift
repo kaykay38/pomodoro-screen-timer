@@ -15,8 +15,16 @@ struct Pomodoro_Screen_TimerApp: App {
     
     init() {
         let s = SettingsStore()
+        let m = TimerModel(settings: s)
+        
         _settings = StateObject(wrappedValue: s)
-        _model    = StateObject(wrappedValue: TimerModel(settings: s))
+        _model    = StateObject(wrappedValue: m)
+        
+        AppLifecycle.shared.startObserving(
+            settings: s,
+            model: m
+        )
+        
         DispatchQueue.main.async { NSApp.setActivationPolicy(.accessory) } // menu-bar–only app
     }
     

@@ -19,14 +19,20 @@ final class TimerModel: ObservableObject {
     @Published var isRunning = false
     @Published var phase: Phase = .focus
     @Published var completedFocusCount: Int = 0
+    @Published var completedShortBreakCount: Int = 0
+    @Published var completedLongBreakCount: Int = 0
     
+    var completedBreakCount: Int {
+        completedShortBreakCount + completedLongBreakCount
+    }
+
     let settings: SettingsStore
     private var timer: DispatchSourceTimer?
     
-    // test helper
-    private func scaled(_ seconds: Int) -> Int {
+    // test helper, set run time to seconds instead of minutes
+    private func adjustSeconds(_ seconds: Int) -> Int {
         if settings.devTreatMinutesAsSeconds {
-            // 1 minute typed -> 1 second of runtime
+            // 1 minute typed -> 1 second of run time
             return max(1, Int((Double(seconds) / 60.0).rounded()))
         } else {
             return seconds
@@ -48,13 +54,12 @@ final class TimerModel: ObservableObject {
         self.remaining = initial
         print("[TIMER INIT] Initial remaining: \(remaining), totalSeconds: \(totalSeconds), phase: \(phase.rawValue)")
         requestNotificationPermission()
-        AppLifecycle.shared.startObserving(settings: settings, model: self)
     }
     
     func setMinutes(_ minutes: Int) {
         //        totalSeconds = max(1, minutes) * 60
         let base = max(1, minutes) * 60 // DEBUG only
-        totalSeconds = scaled(base) // DEBUG only
+        totalSeconds = adjustSeconds(base) // DEBUG only
         if !isRunning { remaining = totalSeconds }
     }
     
@@ -101,14 +106,15 @@ final class TimerModel: ObservableObject {
         
         // Determine outgoing and next phase
         let outgoing = phase
-        let next: Phase = {
-            if outgoing == .focus {
-                let c = completedFocusCount + 1
-                return (c % max(1, settings.cyclesUntilLongBreak) == 0) ? .longBreak : .shortBreak
-            } else {
-                return .focus
-            }
-        }()
+        let next: Phase
+        if outgoing == .focus {
+            let nextFocusCount = completedFocusCount + 1
+            next = (nextFocusCount % max(1, settings.cyclesUntilLongBreak) == 0)
+                ? .longBreak
+                : .shortBreak
+        } else {
+            next = .focus
+        }
         
         // 0) Stop outgoing overlay first (will stop the OLD alarm if visible)
         OverlayController.shared.dismiss()
@@ -140,10 +146,13 @@ final class TimerModel: ObservableObject {
         }
         
         // 2) Post system notification
-        postLocalNotification()
+        postLocalNotification(for: outgoing)
         
         // 3) Switch phase + reset counters
         if outgoing == .focus { completedFocusCount += 1 }
+        else if outgoing == .shortBreak { completedShortBreakCount += 1 }
+        else { completedLongBreakCount += 1 }
+        
         phase = next
         totalSeconds = seconds(for: phase)
         remaining = totalSeconds
@@ -256,16 +265,16 @@ final class TimerModel: ObservableObject {
         case .shortBreak: base = settings.defaultBreakMinutes * 60
         case .longBreak:  base = settings.longBreakMinutes  * 60
         }
-        return scaled(base)
+        return adjustSeconds(base)
         // DEBUG only
     }
     
     
     
-    private func postLocalNotification() {
+    private func postLocalNotification(for completed: Phase) {
         let content = UNMutableNotificationContent()
-        content.title = phase == .focus ? "Focus complete" : "Break complete"
-        content.body  = phase == .focus ? "Time for a break" : "Back to focus"
+        content.title = completed == .focus ? "Focus complete" : "Break complete"
+        content.body  = completed == .focus ? "Time for a break" : "Back to focus"
         content.sound = .default
         let req = UNNotificationRequest(
             identifier: UUID().uuidString,

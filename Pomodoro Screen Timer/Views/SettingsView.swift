@@ -59,6 +59,7 @@ struct SettingsView: View {
         .frame(
             minWidth: 420, idealWidth: 420, maxWidth: 420,
             minHeight: 420, idealHeight: 500, maxHeight: 800)
+        .background(WindowBehaviorConfigurator(behavior: .floating))
     }
 
     // MARK: - Tab Content Views

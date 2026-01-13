@@ -23,6 +23,28 @@ struct MainView: View {
                 onToggle: { model.toggleStartStop() }
             ).padding(.vertical , 16)
 
+            // Display number of completed focus, short break, long break segments
+            HStack(spacing: 24) {
+                statItem(
+                    value: model.completedFocusCount,
+                    label: "Focus",
+                    systemImage: "brain.head.profile"
+                )
+
+                statItem(
+                    value: model.completedShortBreakCount,
+                    label: "Short",
+                    systemImage: "cup.and.saucer"
+                )
+
+                statItem(
+                    value: model.completedLongBreakCount,
+                    label: "Long",
+                    systemImage: "figure.walk"
+                )
+            }
+            .padding(.top, 4)
+            
             // Phase + Minutes
             HStack(spacing: 16) {
                 Picker("Phase", selection: $model.phase) {
@@ -72,11 +94,30 @@ struct MainView: View {
         .padding(.horizontal, 20)
         .frame(minWidth: 460, minHeight: 420)
         .onAppear { if !model.isRunning { model.remaining = model.totalSeconds } }
+        .background(WindowBehaviorConfigurator(behavior: .floating))
     }
 
     private var progress: Double {
         guard model.totalSeconds > 0 else { return 0 }
         return 1 - Double(model.remaining) / Double(model.totalSeconds)
     }
+    
     private func timeString(_ s: Int) -> String { String(format: "%02d:%02d", s/60, s%60) }
+    
+    @ViewBuilder
+    private func statItem(value: Int, label: String, systemImage: String) -> some View {
+        VStack(spacing: 2) {
+            Label {
+                Text("\(value)")
+                    .font(.headline)
+            } icon: {
+                Image(systemName: systemImage)
+            }
+            .labelStyle(.titleAndIcon)
+
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
 }

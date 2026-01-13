@@ -33,9 +33,31 @@ struct MenuBarView: View {
             }
             .keyboardShortcut("o", modifiers: .command)
 
+            Divider()
+            
+            Button {} label: {
+                HStack {
+                    Text("Focus:   \(model.completedFocusCount)")
+                        .monospacedDigit()
+                }
+            }
+            .buttonStyle(.plain)
+            .allowsHitTesting(false)
+
+            Button {} label: {
+                HStack {
+                    Text("Breaks:  \(model.completedBreakCount)")
+                        .monospacedDigit()
+                }
+            }
+            .buttonStyle(.plain)
+            .allowsHitTesting(false)
+
+            Divider()
+            
             SettingsLink { Text("Settings…") }
                 .keyboardShortcut(",", modifiers: .command)
-
+            
             Divider()
 
             Button("Quit") { NSApp.terminate(nil) }

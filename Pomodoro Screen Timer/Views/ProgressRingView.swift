@@ -13,7 +13,7 @@ struct ProgressRingView: View {
 
     // Sizing & content
     var size: CGFloat = 300       // ring diameter
-    var centerText: String        // usually your time string
+    var centerText: String        // time string
     var isRunning: Bool           // for the icon
     var onToggle: () -> Void      // start/pause action
 

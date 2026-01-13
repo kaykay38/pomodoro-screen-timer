@@ -11,21 +11,22 @@ import AppKit
 struct StatusAppearance {
     let phase: Phase
     let remaining: Int
-
+    
     // Tunables
     var fontSize: CGFloat = 13                    // system-ish size for menu bar
     var fontWeight: NSFont.Weight = .semibold
     var colorizeText: Bool = true                 // color timer text by phase
-
+    
     var iconName: String = "timer"                // looks bigger than "timer.circle.fill"
     var iconWeight: NSFont.Weight = .bold
     /// If nil, we’ll auto-fit icon to status bar height with your padding.
     var iconPointSize: CGFloat? = nil
-
+    
     // Layout
-    var padding = NSEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
-    var spacing: CGFloat = 4
-    var fixedTemplate: String = "L 100:00"        // locks width for no jiggle
+    var padding = NSEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
+    var spacing: CGFloat = 1
+    var iconHorizontalTrim: CGFloat = 0   // trim left right padding
+    var fixedTemplate: String = "10:00"   // locks width for no jiggle
 }
 
 func makeStatusImage(_ a: StatusAppearance) -> NSImage {
@@ -39,7 +40,7 @@ func makeStatusImage(_ a: StatusAppearance) -> NSImage {
 
     // 3) Text
     let mins = a.remaining / 60, secs = a.remaining % 60
-    let text = "\(a.phase.shortName) \(String(format: "%02d:%02d", mins, secs))"
+    let text = "\(String(format: "%02d:%02d", mins, secs))"
     let phaseColor = a.phase.nsColor
     let textColor: NSColor = a.colorizeText ? phaseColor : .labelColor
     let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: textColor]
@@ -56,9 +57,15 @@ func makeStatusImage(_ a: StatusAppearance) -> NSImage {
         .withSymbolConfiguration(iconCfg)?
         .withSymbolConfiguration(pal)
     let iconSize = base?.size ?? NSSize(width: desiredIconPt, height: desiredIconPt)
-
+    let visualIconWidth = max(1, iconSize.width - a.iconHorizontalTrim * 2)
+    
     // 5) Canvas sized exactly to status bar (prevents OS downscaling)
-    let totalW = a.padding.left + iconSize.width + a.spacing + fixedTextSize.width + a.padding.right
+    let totalW = a.padding.left
+               + visualIconWidth
+               + a.spacing
+               + fixedTextSize.width
+               + a.padding.right
+
     let size = NSSize(width: ceil(totalW), height: ceil(barH))
     let img = NSImage(size: size)
     img.lockFocus()
@@ -69,11 +76,16 @@ func makeStatusImage(_ a: StatusAppearance) -> NSImage {
 
     // Draw icon
     if let base {
-        base.draw(in: NSRect(x: a.padding.left, y: iconY, width: iconSize.width, height: iconSize.height))
+        base.draw(in: NSRect(
+            x: a.padding.left - a.iconHorizontalTrim,
+            y: iconY,
+            width: visualIconWidth,
+            height: iconSize.height
+        ))
     }
 
     // Draw fixed-width text (no jiggle)
-    let textX = a.padding.left + iconSize.width + a.spacing
+    let textX = a.padding.left + visualIconWidth + a.spacing
     (text as NSString).draw(at: NSPoint(x: textX, y: textY), withAttributes: attrs)
 
     img.unlockFocus()

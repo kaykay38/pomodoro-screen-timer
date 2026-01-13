@@ -18,11 +18,10 @@ struct MenuBarStatusLabel: View {
             fontSize: 15,                 // try 15–16 for “bigger”
             fontWeight: .semibold,
             colorizeText: true,           // phase-colored timer text
-            iconName: "timer.circle.fill",
+            iconName: "timer",
             iconWeight: .bold,
-            padding: .init(top: 1, left: 1, bottom: 1, right: 1), // tighter padding
-            spacing: 2,
-            fixedTemplate: "L 100:00"     // keeps width static
+            padding: .init(top: 1, left: 0, bottom: 1, right: 0), // tighter padding
+            fixedTemplate: "10:00"     // keeps width static
         )
         Image(nsImage: makeStatusImage(appearance))
             .renderingMode(.original)

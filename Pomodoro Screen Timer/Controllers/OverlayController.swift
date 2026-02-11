@@ -10,6 +10,7 @@ import AppKit
 
 @MainActor
 final class OverlayController {
+    
     static let shared = OverlayController()
 
     private var windows: [NSWindow] = []
@@ -58,7 +59,7 @@ final class OverlayController {
             win.ignoresMouseEvents = false
             win.isMovable = false
             
-            win.level = .modalPanel
+            win.level = .screenSaver
             win.collectionBehavior = [.canJoinAllSpaces]
             
             win.backgroundColor = .black

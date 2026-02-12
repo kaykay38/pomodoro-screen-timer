@@ -62,7 +62,7 @@ struct SettingsView: View {
         .background(WindowBehaviorConfigurator(behavior: .floating))
     }
 
-    // MARK: - Tab Content Views
+    // MARK: Tab Content Views
 
     @ViewBuilder
     private var timerTabContent: some View {
@@ -157,7 +157,7 @@ struct SettingsView: View {
 
             GroupBox {
                 Picker("Sound", selection: $settings.breakAlarmSoundName) {
-                    ForEach(SystemSound.systemSounds, id: \.name) { sound in
+                    ForEach(SystemSounds.systemSounds, id: \.name) { sound in
                         Text(sound.displayName).tag(sound.name)
                     }
                 }
@@ -165,7 +165,7 @@ struct SettingsView: View {
                 
                 HStack {
                     Text("Custom sound file")
-                    if settings.customBreakSoundPath.isEmpty {
+                    if settings.breakAlarmCustomSoundPath.isEmpty {
                         Button("Select File...") {
                             FileSelectionHelper.selectSoundFile { url in
                                 guard let url,
@@ -173,14 +173,14 @@ struct SettingsView: View {
                                         from: url, subfolder: "Sounds")
                                 else { return }
                                 DispatchQueue.main.async {
-                                    settings.customBreakSoundPath = copiedURL.path
+                                    settings.breakAlarmCustomSoundPath = copiedURL.path
                                 }
                             }
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(
-                                URL(fileURLWithPath: settings.customBreakSoundPath)
+                                URL(fileURLWithPath: settings.breakAlarmCustomSoundPath)
                                     .lastPathComponent
                             )
                             .font(.caption)
@@ -194,12 +194,12 @@ struct SettingsView: View {
                                                     from: url, subfolder: "Sounds")
                                         else { return }
                                         DispatchQueue.main.async {
-                                            settings.customBreakSoundPath = copiedURL.path
+                                            settings.breakAlarmCustomSoundPath = copiedURL.path
                                         }
                                     }
                                 }
                                 Button("Remove") {
-                                    settings.customBreakSoundPath = ""
+                                    settings.breakAlarmCustomSoundPath = ""
                                 }
                             }
                         }
@@ -209,7 +209,7 @@ struct SettingsView: View {
                 AlarmTestButton(
                     soundName: { settings.breakAlarmSoundName },
                     fileExtension: { settings.breakAlarmFileExtension },
-                    customPath: { settings.customBreakSoundPath },
+                    customPath: { settings.breakAlarmCustomSoundPath },
                     durationSeconds: { settings.alarmDurationSeconds },
                     resolvedURL: {
                          settings.resolvedBreakSoundURL()
@@ -223,7 +223,7 @@ struct SettingsView: View {
 
             GroupBox {
                 Picker("Sound", selection: $settings.focusAlarmSoundName) {
-                    ForEach(SystemSound.systemSounds, id: \.name) { sound in
+                    ForEach(SystemSounds.systemSounds, id: \.name) { sound in
                         Text(sound.displayName).tag(sound.name)
                     }
                 }
@@ -231,7 +231,7 @@ struct SettingsView: View {
                 
                 HStack {
                     Text("Custom sound file")
-                    if settings.customFocusSoundPath.isEmpty {
+                    if settings.focusAlarmCustomSoundPath.isEmpty {
                         Button("Select File...") {
                             FileSelectionHelper.selectSoundFile { url in
                                 guard let url,
@@ -239,20 +239,20 @@ struct SettingsView: View {
                                         from: url, subfolder: "Sounds")
                                 else { return }
                                 DispatchQueue.main.async {
-                                    settings.customFocusSoundPath = copiedURL.path
+                                    settings.focusAlarmCustomSoundPath = copiedURL.path
                                 }
                             }
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(
-                                URL(fileURLWithPath: settings.customFocusSoundPath)
+                                URL(fileURLWithPath: settings.focusAlarmCustomSoundPath)
                                     .lastPathComponent
                             )
                             .font(.caption)
                             .foregroundColor(.secondary)
                             HStack {
-                                Button("Change") {
+                                Button("Edit") {
                                     FileSelectionHelper.selectSoundFile { url in
                                         guard let url,
                                               let copiedURL =
@@ -260,12 +260,12 @@ struct SettingsView: View {
                                                     from: url, subfolder: "Sounds")
                                         else { return }
                                         DispatchQueue.main.async {
-                                            settings.customFocusSoundPath = copiedURL.path
+                                            settings.focusAlarmCustomSoundPath = copiedURL.path
                                         }
                                     }
                                 }
                                 Button("Remove") {
-                                    settings.customFocusSoundPath = ""
+                                    settings.focusAlarmCustomSoundPath = ""
                                 }
                             }
                         }
@@ -275,7 +275,7 @@ struct SettingsView: View {
                 AlarmTestButton(
                     soundName: { settings.focusAlarmSoundName },
                     fileExtension: { settings.focusAlarmFileExtension },
-                    customPath: { settings.customFocusSoundPath },
+                    customPath: { settings.focusAlarmCustomSoundPath },
                     durationSeconds: { settings.alarmDurationSeconds },
                     resolvedURL: {
                          settings.resolvedFocusSoundURL()
@@ -293,7 +293,7 @@ struct SettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             GroupBox {
-                Toggle("Show break overlay", isOn: $settings.showBreakOverlay)
+                Toggle("Show break overlay", isOn: $settings.breakOverlayEnabled)
 
                 Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
                     gridRowLabelValue("Background hex") {
@@ -302,7 +302,7 @@ struct SettingsView: View {
                             .frame(width: 120)
                     }
                     gridRowLabelValue("Custom image") {
-                        if settings.customBreakImagePath.isEmpty {
+                        if settings.breakOverlayCustomImagePath.isEmpty {
                             Button("Select Image...") {
                                 FileSelectionHelper.selectImageFile { url in
                                     guard let url,
@@ -310,7 +310,7 @@ struct SettingsView: View {
                                             from: url, subfolder: "Images")
                                     else { return }
                                     DispatchQueue.main.async {
-                                        settings.customBreakImagePath = copiedURL.path
+                                        settings.breakOverlayCustomImagePath = copiedURL.path
                                         settings.breakOverlayImageName = copiedURL.path
                                     }
                                 }
@@ -318,7 +318,7 @@ struct SettingsView: View {
                         } else {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(
-                                    URL(fileURLWithPath: settings.customBreakImagePath)
+                                    URL(fileURLWithPath: settings.breakOverlayCustomImagePath)
                                         .lastPathComponent
                                 )
                                 .font(.caption)
@@ -332,13 +332,13 @@ struct SettingsView: View {
                                                         from: url, subfolder: "Images")
                                             else { return }
                                             DispatchQueue.main.async {
-                                                settings.customBreakImagePath = copiedURL.path
+                                                settings.breakOverlayCustomImagePath = copiedURL.path
                                                 settings.breakOverlayImageName = copiedURL.path
                                             }
                                         }
                                     }
                                     Button("Remove") {
-                                        settings.customBreakImagePath = ""
+                                        settings.breakOverlayCustomImagePath = ""
                                         settings.breakOverlayImageName = ""
                                     }
                                 }
@@ -386,7 +386,7 @@ struct SettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             GroupBox {
-                Toggle("Show focus overlay", isOn: $settings.showFocusOverlay)
+                Toggle("Show focus overlay", isOn: $settings.focusOverlayEnabled)
 
                 Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
                     gridRowLabelValue("Background hex") {
@@ -395,7 +395,7 @@ struct SettingsView: View {
                             .frame(width: 120)
                     }
                     gridRowLabelValue("Custom image") {
-                        if settings.customFocusImagePath.isEmpty {
+                        if settings.focusOverlayCustomImagePath.isEmpty {
                             Button("Select Image...") {
                                 FileSelectionHelper.selectImageFile { url in
                                     guard let url,
@@ -403,7 +403,7 @@ struct SettingsView: View {
                                             from: url, subfolder: "Images")
                                     else { return }
                                     DispatchQueue.main.async {
-                                        settings.customFocusImagePath = copiedURL.path
+                                        settings.focusOverlayCustomImagePath = copiedURL.path
                                         settings.focusOverlayImageName = copiedURL.path
                                     }
                                 }
@@ -411,13 +411,13 @@ struct SettingsView: View {
                         } else {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(
-                                    URL(fileURLWithPath: settings.customFocusImagePath)
+                                    URL(fileURLWithPath: settings.focusOverlayCustomImagePath)
                                         .lastPathComponent
                                 )
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 HStack {
-                                    Button("Change") {
+                                    Button("Edit") {
                                         FileSelectionHelper.selectImageFile { url in
                                             guard let url,
                                                 let copiedURL =
@@ -425,13 +425,13 @@ struct SettingsView: View {
                                                         from: url, subfolder: "Images")
                                             else { return }
                                             DispatchQueue.main.async {
-                                                settings.customFocusImagePath = copiedURL.path
+                                                settings.focusOverlayCustomImagePath = copiedURL.path
                                                 settings.focusOverlayImageName = copiedURL.path
                                             }
                                         }
                                     }
                                     Button("Remove") {
-                                        settings.customFocusImagePath = ""
+                                        settings.focusOverlayCustomImagePath = ""
                                         settings.focusOverlayImageName = ""
                                     }
                                 }
@@ -482,7 +482,7 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Helper Methods
+    // MARK: Helper Methods
 
     private func durationRow(
         title: String,

@@ -98,7 +98,7 @@ enum AlarmPlayer {
         finished?.onStop = nil
     }
 
-    // MARK: - Internals
+    // MARK: Internals
 
     @discardableResult
     private static func startAVPlayer(with url: URL, duration: Double, handle: AlarmHandle) -> Bool {

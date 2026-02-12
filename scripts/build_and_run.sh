@@ -54,7 +54,6 @@ build_project() {
         -derivedDataPath "$BUILD_DIR" \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO \
         build
     
     if [ $? -eq 0 ]; then

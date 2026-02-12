@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 class FileSelectionHelper {
     
-    // MARK: - Sound File Selection
+    // MARK: Sound File Selection
     static func selectSoundFile(completion: @escaping (URL?) -> Void) {
         let panel = NSOpenPanel()
         panel.title = "Select Sound File"
@@ -39,7 +39,7 @@ class FileSelectionHelper {
         }
     }
     
-    // MARK: - Image File Selection
+    // MARK: Image File Selection
     static func selectImageFile(completion: @escaping (URL?) -> Void) {
         let panel = NSOpenPanel()
         panel.title = "Select Background Image"
@@ -67,7 +67,7 @@ class FileSelectionHelper {
         }
     }
     
-    // MARK: - File Management
+    // MARK: File Management
     static func copyFileToAppSupport(from sourceURL: URL, subfolder: String) -> URL? {
         guard let appSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, 
                                                            in: .userDomainMask).first else {

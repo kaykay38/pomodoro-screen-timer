@@ -17,6 +17,8 @@ struct ProgressRingView: View {
     var isRunning: Bool           // for the icon
     var onToggle: () -> Void      // start/pause action
 
+    @State private var isHovered: Bool = false
+    
     var body: some View {
         ZStack {
             // Track
@@ -57,6 +59,10 @@ struct ProgressRingView: View {
                 .buttonStyle(.plain)
                 .contentShape(Circle())
                 .padding(.top, size * 0.01)
+                .onHover { hover in
+                    isHovered = hover
+                    if hover { NSCursor.pointingHand.push() } else { NSCursor.pop() }
+                }.animation(.easeOut(duration: 0.15), value: isHovered)
             }
             .frame(width: size * 0.75) // keep the stack nicely inside the ring
         }
@@ -67,7 +73,7 @@ struct ProgressRingView: View {
         .accessibilityValue(Text("\(Int(progress * 100)) percent"))
     }
 
-    // MARK: - Computed
+    // MARK: Computed
     private var clampedProgress: Double { max(0, min(1, progress)) }
     private var ringWidth: CGFloat { max(14, min(32, size * 0.085)) }
     private var phaseColor: Color { phase.color }

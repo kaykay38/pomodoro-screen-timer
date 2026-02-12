@@ -5,18 +5,8 @@
 //  Created by Mia on 9/18/25.
 //
 
-import SwiftUI
 import AppKit
-
-struct OverlayConfig {
-    let colorHex: String
-    let imageName: String?
-    let title: String
-    let subtitle: String
-    let durationSeconds: Int?        // nil = no countdown/auto-dismiss
-    let primaryButtonTitle: String?  // e.g. "Start Now"
-    let counterText: String?         // e.g. "Closing in" / "Starting in"
-}
+import SwiftUI
 
 extension Notification.Name {
     static let overlayTick = Notification.Name("UnifiedOverlayTick")
@@ -27,37 +17,33 @@ struct OverlayView: View {
     var onClose: () -> Void
     var onPrimary: () -> Void
     @State private var remaining: Int?
+    @EnvironmentObject private var settings: SettingsStore
 
     var body: some View {
         ZStack {
             backgroundView.ignoresSafeArea()
             VStack(spacing: 16) {
-                Text(config.title)
+                Text(config.message)
                     .font(.system(size: 56, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)
 
-                Text(config.subtitle)
-                    .font(.title2)
-                    .opacity(0.9)
-                    .multilineTextAlignment(.center)
-
-                if let r = remaining, let label = config.counterText {
+                if let r = remaining, let label = config.counterLabel {
                     Text("\(label) \(r)s")
                         .font(.headline.monospacedDigit())
                         .padding(.top, 6)
                 }
-
-                HStack(spacing: 16) {
-                    Button("Dismiss") { onClose() }
-                        .keyboardShortcut(.escape, modifiers: [])
-                        .buttonStyle(.borderedProminent)
-                    if let title = config.primaryButtonTitle {
-                        Button(title) { onPrimary() }
-                            .keyboardShortcut(.return, modifiers: [])
-                            .buttonStyle(.bordered)
-                    }
+                if config.showDismissButton {
+                    HStack(spacing: 16) {
+                        Button("Dismiss") { onClose() }
+                            .keyboardShortcut(.escape, modifiers: [])
+                            .buttonStyle(.borderedProminent)
+                        if let title = config.primaryButtonTitle {
+                            Button(title) { onPrimary() }
+                                .keyboardShortcut(.return, modifiers: [])
+                                .buttonStyle(.bordered)
+                        }
+                    }.padding(.top, 20)
                 }
-                .padding(.top, 20)
             }
             .foregroundStyle(.white)
             .shadow(radius: 8)
@@ -66,8 +52,11 @@ struct OverlayView: View {
         .onAppear {
             if let secs = config.durationSeconds { remaining = secs }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .overlayTick)) { note in
-            if let r = note.userInfo?["remaining"] as? Int { remaining = max(0, r) }
+        .onReceive(NotificationCenter.default.publisher(for: .overlayTick)) {
+            note in
+            if let r = note.userInfo?["remaining"] as? Int {
+                remaining = max(0, r)
+            }
         }
     }
 
@@ -87,7 +76,9 @@ struct OverlayView: View {
     }
 
     private func loadImage(name: String) -> NSImage? {
-        if name.hasPrefix("/") || name.contains(".") { return NSImage(contentsOfFile: name) }
+        if name.hasPrefix("/") || name.contains(".") {
+            return NSImage(contentsOfFile: name)
+        }
         return NSImage(named: name)
     }
 

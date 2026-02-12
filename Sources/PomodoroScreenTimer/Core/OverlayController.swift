@@ -25,7 +25,7 @@ final class OverlayController {
     private var alarmHandle: AlarmHandle?
 
     func show(_ config: OverlayConfig,
-              handle: AlarmHandle,
+              alarmHandle: AlarmHandle,
               onPrimary: (() -> Void)? = nil,
               onDismiss:  (() -> Void)? = nil) {
 
@@ -37,7 +37,7 @@ final class OverlayController {
                     onPrimary: { [weak self] in self?.firePrimaryAndDismiss() }
                 )
             }
-            self.alarmHandle = handle
+            self.alarmHandle = alarmHandle
             self.onPrimary  = onPrimary
             self.onDismiss  = onDismiss
             restartCountdownIfNeeded(config.durationSeconds)
@@ -72,7 +72,7 @@ final class OverlayController {
             hosts.append(host)
         }
 
-        self.alarmHandle = handle
+        self.alarmHandle = alarmHandle
         self.onPrimary   = onPrimary
         self.onDismiss   = onDismiss
 
@@ -109,14 +109,14 @@ final class OverlayController {
         remainingSeconds = secs
         countdownTimer = Timer.scheduledTimer(timeInterval: 1,
                                               target: self,
-                                              selector: #selector(handleTick),
+                                              selector: #selector(tick),
                                               userInfo: nil,
                                               repeats: true)
         if let t = countdownTimer { RunLoop.main.add(t, forMode: .common) }
         NotificationCenter.default.post(name: .overlayTick, object: nil, userInfo: ["remaining": remainingSeconds])
     }
 
-    @objc private func handleTick() {
+    @objc private func tick() {
         remainingSeconds -= 1
         NotificationCenter.default.post(name: .overlayTick, object: nil, userInfo: ["remaining": remainingSeconds])
         if remainingSeconds <= 0 {

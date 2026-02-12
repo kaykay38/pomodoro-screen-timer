@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		775370572F3E603200060523 /* Pomodoro-Screen-Timer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 775370562F3E603200060523 /* Pomodoro-Screen-Timer-Info.plist */; };
 		777A57A92E81F55400550E2D /* LoginItemHelper.app in Resources */ = {isa = PBXBuildFile; fileRef = 77C0F8602E7B2BDF00722B25 /* LoginItemHelper.app */; };
 		777A57B62E81FEC900550E2D /* LoginItemHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77C0F8602E7B2BDF00722B25 /* LoginItemHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		775370562F3E603200060523 /* Pomodoro-Screen-Timer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pomodoro-Screen-Timer-Info.plist"; sourceTree = "<group>"; };
 		77C0F82D2E7B2BCA00722B25 /* Pomodoro Screen Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Screen Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C0F83F2E7B2BCB00722B25 /* Pomodoro Screen TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro Screen TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C0F8492E7B2BCB00722B25 /* Pomodoro Screen TimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro Screen TimerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,47 +74,134 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		77D080852E7F08D3008F8077 /* Exceptions for "LoginItemHelper" folder in "LoginItemHelper" target */ = {
+		7753701D2F3E56C300060523 /* Exceptions for "Sources" folder in "Pomodoro Screen Timer" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				PomodoroScreenTimer/Core/AlarmHandle.swift,
+				PomodoroScreenTimer/Core/OverlayConfig.swift,
+				PomodoroScreenTimer/Core/OverlayController.swift,
+				PomodoroScreenTimer/Core/Phase.swift,
+				PomodoroScreenTimer/Core/SettingsStore.swift,
+				PomodoroScreenTimer/Core/TimerModel.swift,
+				PomodoroScreenTimer/Pomodoro_Screen_Timer.xcdatamodeld,
+				PomodoroScreenTimer/Pomodoro_Screen_TimerApp.swift,
+				PomodoroScreenTimer/Resources/Assets.xcassets,
+				PomodoroScreenTimer/Resources/Icon.icon,
+				PomodoroScreenTimer/Services/AlarmPlayer.swift,
+				PomodoroScreenTimer/Services/AppLifecycle.swift,
+				PomodoroScreenTimer/Services/LoginItemManager.swift,
+				PomodoroScreenTimer/Services/Persistence.swift,
+				PomodoroScreenTimer/Utils/FileSelectionHelper.swift,
+				PomodoroScreenTimer/Utils/SystemSounds.swift,
+				PomodoroScreenTimer/Utils/Window/WindowBehaviorConfigurator.swift,
+				PomodoroScreenTimer/Views/ContentView.swift,
+				PomodoroScreenTimer/Views/MainView.swift,
+				PomodoroScreenTimer/Views/MenuBar/MenuBarStatusLabelView.swift,
+				PomodoroScreenTimer/Views/MenuBar/MenuBarView.swift,
+				PomodoroScreenTimer/Views/MenuBar/StatusImage.swift,
+				PomodoroScreenTimer/Views/OverlayView.swift,
+				PomodoroScreenTimer/Views/ProgressRingView.swift,
+				PomodoroScreenTimer/Views/SettingsView.swift,
+			);
+			target = 77C0F82C2E7B2BCA00722B25 /* Pomodoro Screen Timer */;
+		};
+		7753701F2F3E56C300060523 /* Exceptions for "Sources" folder in "LoginItemHelper" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginItemHelper/Info.plist,
+				PomodoroScreenTimer/Core/AlarmHandle.swift,
+				PomodoroScreenTimer/Core/OverlayConfig.swift,
+				PomodoroScreenTimer/Core/OverlayController.swift,
+				PomodoroScreenTimer/Core/Phase.swift,
+				PomodoroScreenTimer/Core/SettingsStore.swift,
+				PomodoroScreenTimer/Core/TimerModel.swift,
+				PomodoroScreenTimer/Pomodoro_Screen_Timer.xcdatamodeld,
+				PomodoroScreenTimer/Pomodoro_Screen_TimerApp.swift,
+				PomodoroScreenTimer/Resources/Assets.xcassets,
+				PomodoroScreenTimer/Resources/Icon.icon,
+				PomodoroScreenTimer/Resources/Info.plist,
+				PomodoroScreenTimer/Services/AlarmPlayer.swift,
+				PomodoroScreenTimer/Services/AppLifecycle.swift,
+				PomodoroScreenTimer/Services/LoginItemManager.swift,
+				PomodoroScreenTimer/Services/Persistence.swift,
+				PomodoroScreenTimer/Utils/FileSelectionHelper.swift,
+				PomodoroScreenTimer/Utils/SystemSounds.swift,
+				PomodoroScreenTimer/Utils/Window/WindowBehaviorConfigurator.swift,
+				PomodoroScreenTimer/Views/ContentView.swift,
+				PomodoroScreenTimer/Views/MainView.swift,
+				PomodoroScreenTimer/Views/MenuBar/MenuBarStatusLabelView.swift,
+				PomodoroScreenTimer/Views/MenuBar/MenuBarView.swift,
+				PomodoroScreenTimer/Views/MenuBar/StatusImage.swift,
+				PomodoroScreenTimer/Views/OverlayView.swift,
+				PomodoroScreenTimer/Views/ProgressRingView.swift,
+				PomodoroScreenTimer/Views/SettingsView.swift,
 			);
 			target = 77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */;
+		};
+		7753703F2F3E56E300060523 /* Exceptions for "Tests" folder in "Pomodoro Screen TimerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Pomodoro Screen TimerTests/Pomodoro_Screen_TimerTests.swift",
+			);
+			target = 77C0F83E2E7B2BCB00722B25 /* Pomodoro Screen TimerTests */;
+		};
+		775370402F3E56E300060523 /* Exceptions for "Tests" folder in "Pomodoro Screen TimerUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Pomodoro Screen TimerUITests/Pomodoro_Screen_TimerUITests.swift",
+				"Pomodoro Screen TimerUITests/Pomodoro_Screen_TimerUITestsLaunchTests.swift",
+			);
+			target = 77C0F8482E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */;
+		};
+		775370412F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelper" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginItemHelperTests/LoginItemHelperTests.swift,
+				LoginItemHelperUITests/LoginItemHelperUITests.swift,
+				LoginItemHelperUITests/LoginItemHelperUITestsLaunchTests.swift,
+				"Pomodoro Screen TimerTests/Pomodoro_Screen_TimerTests.swift",
+				"Pomodoro Screen TimerUITests/Pomodoro_Screen_TimerUITests.swift",
+				"Pomodoro Screen TimerUITests/Pomodoro_Screen_TimerUITestsLaunchTests.swift",
+			);
+			target = 77C0F85F2E7B2BDF00722B25 /* LoginItemHelper */;
+		};
+		775370422F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelperTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginItemHelperTests/LoginItemHelperTests.swift,
+			);
+			target = 77C0F8702E7B2BE000722B25 /* LoginItemHelperTests */;
+		};
+		775370432F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelperUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginItemHelperUITests/LoginItemHelperUITests.swift,
+				LoginItemHelperUITests/LoginItemHelperUITestsLaunchTests.swift,
+			);
+			target = 77C0F87A2E7B2BE000722B25 /* LoginItemHelperUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		77C0F82F2E7B2BCA00722B25 /* Pomodoro Screen Timer */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Pomodoro Screen Timer";
-			sourceTree = "<group>";
-		};
-		77C0F8422E7B2BCB00722B25 /* Pomodoro Screen TimerTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Pomodoro Screen TimerTests";
-			sourceTree = "<group>";
-		};
-		77C0F84C2E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Pomodoro Screen TimerUITests";
-			sourceTree = "<group>";
-		};
-		77C0F8612E7B2BDF00722B25 /* LoginItemHelper */ = {
+		77536FDB2F3E568A00060523 /* Sources */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				77D080852E7F08D3008F8077 /* Exceptions for "LoginItemHelper" folder in "LoginItemHelper" target */,
+				7753701D2F3E56C300060523 /* Exceptions for "Sources" folder in "Pomodoro Screen Timer" target */,
+				7753701F2F3E56C300060523 /* Exceptions for "Sources" folder in "LoginItemHelper" target */,
 			);
-			path = LoginItemHelper;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */ = {
+		7753702E2F3E56D900060523 /* Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LoginItemHelperTests;
-			sourceTree = "<group>";
-		};
-		77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = LoginItemHelperUITests;
+			exceptions = (
+				7753703F2F3E56E300060523 /* Exceptions for "Tests" folder in "Pomodoro Screen TimerTests" target */,
+				775370402F3E56E300060523 /* Exceptions for "Tests" folder in "Pomodoro Screen TimerUITests" target */,
+				775370412F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelper" target */,
+				775370422F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelperTests" target */,
+				775370432F3E56E300060523 /* Exceptions for "Tests" folder in "LoginItemHelperUITests" target */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -173,14 +262,11 @@
 		77C0F8242E7B2BCA00722B25 = {
 			isa = PBXGroup;
 			children = (
-				77C0F82F2E7B2BCA00722B25 /* Pomodoro Screen Timer */,
-				77C0F8422E7B2BCB00722B25 /* Pomodoro Screen TimerTests */,
-				77C0F84C2E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */,
-				77C0F8612E7B2BDF00722B25 /* LoginItemHelper */,
-				77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */,
-				77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */,
+				7753702E2F3E56D900060523 /* Tests */,
+				77536FDB2F3E568A00060523 /* Sources */,
 				777A57A82E81F55400550E2D /* Frameworks */,
 				77C0F82E2E7B2BCA00722B25 /* Products */,
+				775370562F3E603200060523 /* Pomodoro-Screen-Timer-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,9 +300,6 @@
 			dependencies = (
 				777A57B52E81FEBE00550E2D /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				77C0F82F2E7B2BCA00722B25 /* Pomodoro Screen Timer */,
-			);
 			name = "Pomodoro Screen Timer";
 			packageProductDependencies = (
 			);
@@ -236,9 +319,6 @@
 			);
 			dependencies = (
 				77C0F8412E7B2BCB00722B25 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				77C0F8422E7B2BCB00722B25 /* Pomodoro Screen TimerTests */,
 			);
 			name = "Pomodoro Screen TimerTests";
 			packageProductDependencies = (
@@ -260,9 +340,6 @@
 			dependencies = (
 				77C0F84B2E7B2BCB00722B25 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				77C0F84C2E7B2BCB00722B25 /* Pomodoro Screen TimerUITests */,
-			);
 			name = "Pomodoro Screen TimerUITests";
 			packageProductDependencies = (
 			);
@@ -283,7 +360,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				77C0F8612E7B2BDF00722B25 /* LoginItemHelper */,
+				77536FDB2F3E568A00060523 /* Sources */,
+				7753702E2F3E56D900060523 /* Tests */,
 			);
 			name = LoginItemHelper;
 			packageProductDependencies = (
@@ -305,9 +383,6 @@
 			dependencies = (
 				77C0F8732E7B2BE000722B25 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				77C0F8742E7B2BE000722B25 /* LoginItemHelperTests */,
-			);
 			name = LoginItemHelperTests;
 			packageProductDependencies = (
 			);
@@ -327,9 +402,6 @@
 			);
 			dependencies = (
 				77C0F87D2E7B2BE000722B25 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				77C0F87E2E7B2BE000722B25 /* LoginItemHelperUITests */,
 			);
 			name = LoginItemHelperUITests;
 			packageProductDependencies = (
@@ -423,6 +495,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775370572F3E603200060523 /* Pomodoro-Screen-Timer-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +740,7 @@
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Pomodoro-Screen-Timer-Info.plist";
+				INFOPLIST_FILE = Sources/PomodoroScreenTimer/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -719,7 +792,7 @@
 				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Pomodoro-Screen-Timer-Info.plist";
+				INFOPLIST_FILE = Sources/PomodoroScreenTimer/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -852,7 +925,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LoginItemHelper/Info.plist;
+				INFOPLIST_FILE = Sources/LoginItemHelper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -891,7 +964,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LoginItemHelper/Info.plist;
+				INFOPLIST_FILE = Sources/LoginItemHelper/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSBackgroundOnly = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

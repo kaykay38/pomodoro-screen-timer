@@ -52,7 +52,8 @@ final class OverlayController {
             )
 
             let host = NSHostingController(rootView: view)
-            let win  = NSWindow(contentViewController: host)
+            let win  = OverlayNSWindow(contentViewController: host)
+            
             win.styleMask = [.borderless]
             win.isOpaque = true
             win.hasShadow = false
@@ -60,12 +61,13 @@ final class OverlayController {
             win.isMovable = false
             
             win.level = .screenSaver
-            win.collectionBehavior = [.canJoinAllSpaces]
+            win.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
             
             win.backgroundColor = .black
             win.setFrame(screen.frame, display: true)
             
-            win.orderFrontRegardless()
+            
+            win.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
 
             windows.append(win)

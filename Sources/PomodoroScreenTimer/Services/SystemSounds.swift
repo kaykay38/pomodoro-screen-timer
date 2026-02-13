@@ -28,17 +28,16 @@ extension SystemSounds {
     private static func loadAvailableSystemSounds() -> [SystemSounds] {
         let fileManager = FileManager.default
         
-        let systemLibrary = URL(fileURLWithPath: "/System/Library/Sounds")
-        let globalLibrary = URL(fileURLWithPath: "/Library/Sounds")
+        let systemLibrary = URL(fileURLWithPath: "/System/Library/PrivateFrameworks/ToneLibrary.framework/Versions/A/Resources/Ringtones/")
         // Use the modern API for user directory
         let userLibrary = fileManager.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Sounds")
+            .appendingPathComponent("Library/Ringtones")
         
         // Order matters: User sounds will override System sounds if names match
-        let directories = [systemLibrary, globalLibrary, userLibrary]
+        let directories = [systemLibrary, userLibrary]
         
         var sounds: [String: SystemSounds] = [:]
-        let allowedExtensions = Set(["aiff", "wav", "caf", "m4a"])
+        let allowedExtensions = Set(["m4r", "aiff", "wav", "caf", "m4a"])
         
         for dir in directories {
             // Skip scanning if the folder doesn't exist (e.g. ~/Library/Sounds is often empty/missing)

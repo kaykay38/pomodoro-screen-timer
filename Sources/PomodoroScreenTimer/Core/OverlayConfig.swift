@@ -8,6 +8,7 @@
 import Foundation
 
 struct OverlayConfig {
+    let customImageEnabled: Bool
     let colorHex: String
     let imageName: String?
     let message: String

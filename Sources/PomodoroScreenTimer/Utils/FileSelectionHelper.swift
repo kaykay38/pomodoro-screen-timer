@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 class FileSelectionHelper {
     
     // MARK: Sound File Selection
-    static func selectSoundFile(completion: @escaping (URL?) -> Void) {
+    static func selectSoundFile(in window: NSWindow? = nil, completion: @escaping (URL?) -> Void) {
         let panel = NSOpenPanel()
         panel.title = "Select Sound File"
         panel.allowsMultipleSelection = false
@@ -37,10 +37,24 @@ class FileSelectionHelper {
                 }
             }
         }
+        
+        if let window = window {
+            // Appears as a sheet attached to the settings window
+            panel.beginSheetModal(for: window) { response in
+                completion(response == .OK ? panel.url : nil)
+            }
+        } else {
+            // Fallback for standalone
+            panel.level = .modalPanel
+            panel.makeKeyAndOrderFront(nil)
+            panel.begin { response in
+                completion(response == .OK ? panel.url : nil)
+            }
+        }
     }
     
     // MARK: Image File Selection
-    static func selectImageFile(completion: @escaping (URL?) -> Void) {
+    static func selectImageFile(in window: NSWindow? = nil, completion: @escaping (URL?) -> Void) {
         let panel = NSOpenPanel()
         panel.title = "Select Background Image"
         panel.allowsMultipleSelection = false
@@ -63,6 +77,20 @@ class FileSelectionHelper {
                 } else {
                     completion(nil)
                 }
+            }
+        }
+        
+        if let window = window {
+            // Appears as a sheet attached to the settings window
+            panel.beginSheetModal(for: window) { response in
+                completion(response == .OK ? panel.url : nil)
+            }
+        } else {
+            // Fallback for standalone
+            panel.level = .modalPanel
+            panel.makeKeyAndOrderFront(nil)
+            panel.begin { response in
+                completion(response == .OK ? panel.url : nil)
             }
         }
     }

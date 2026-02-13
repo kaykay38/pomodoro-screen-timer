@@ -22,6 +22,13 @@ struct OverlayView: View {
     var body: some View {
         ZStack {
             backgroundView.ignoresSafeArea()
+
+            // Hidden button to catch the shortcut regardless of UI state
+            Button("") { onClose() }
+                .keyboardShortcut(.escape, modifiers: [.command])  // Captures Cmd + Escape
+                .opacity(0)
+                .allowsHitTesting(false)
+
             VStack(spacing: 16) {
                 Text(config.message)
                     .font(.system(size: 56, weight: .bold, design: .rounded))
@@ -32,18 +39,18 @@ struct OverlayView: View {
                         .font(.headline.monospacedDigit())
                         .padding(.top, 6)
                 }
-                if config.showDismissButton {
                     HStack(spacing: 16) {
+                        if config.showDismissButton {
                         Button("Dismiss") { onClose() }
                             .keyboardShortcut(.escape, modifiers: [])
                             .buttonStyle(.borderedProminent)
-                        if let title = config.primaryButtonTitle {
+                        }
+                        if config.primaryButtonTitle != nil ,let title = config.primaryButtonTitle {
                             Button(title) { onPrimary() }
                                 .keyboardShortcut(.return, modifiers: [])
                                 .buttonStyle(.bordered)
                         }
                     }.padding(.top, 20)
-                }
             }
             .foregroundStyle(.white)
             .shadow(radius: 8)
@@ -63,7 +70,9 @@ struct OverlayView: View {
     @ViewBuilder private var backgroundView: some View {
         ZStack {
             colorFromHex(config.colorHex)
-            if let name = config.imageName, !name.isEmpty {
+            if config.customImageEnabled, let name = config.imageName,
+                !name.isEmpty
+            {
                 if let nsImage = loadImage(name: name) {
                     Image(nsImage: nsImage)
                         .resizable()

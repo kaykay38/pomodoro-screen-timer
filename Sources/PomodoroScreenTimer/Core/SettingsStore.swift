@@ -21,7 +21,7 @@ final class SettingsStore: ObservableObject {
 
     // Durations & step
     @Published var defaultFocusMinutes: Int = UserDefaults.standard.integer(
-        forKey: "defaultfocusMinutes"
+        forKey: "defaultFocusMinutes"
     ).nonZeroOr(25)
     {
         didSet {
@@ -142,10 +142,11 @@ final class SettingsStore: ObservableObject {
             UserDefaults.standard.set(sBreakMessage, forKey: "sBreakMessage")
         }
     }
-    
+
     // Break Message displays on Overlay
     @Published var lBreakMessage: String =
-        UserDefaults.standard.string(forKey: "lBreakMessage") ?? "Refresh your mind, take a longer break"
+        UserDefaults.standard.string(forKey: "lBreakMessage")
+        ?? "Refresh your mind, take a longer break"
     {
         didSet {
             UserDefaults.standard.set(lBreakMessage, forKey: "lBreakMessage")
@@ -154,7 +155,7 @@ final class SettingsStore: ObservableObject {
 
     @Published var breakMessageVoiceEnabled: Bool =
         UserDefaults.standard.object(forKey: "breakMessageVoiceEnabled")
-        as? Bool ?? true
+        as? Bool ?? false
     {
         didSet {
             UserDefaults.standard.set(
@@ -163,6 +164,8 @@ final class SettingsStore: ObservableObject {
             )
         }
     }
+    @Published var breakMessageVoiceID: String? = nil
+
     // Break overlay
     @Published var breakOverlayEnabled: Bool =
         UserDefaults.standard.object(forKey: "breakOverlayEnabled") as? Bool
@@ -172,6 +175,18 @@ final class SettingsStore: ObservableObject {
             UserDefaults.standard.set(
                 breakOverlayEnabled,
                 forKey: "breakOverlayEnabled"
+            )
+        }
+    }
+    // Custom Break Overlay Image
+    @Published var breakOverlayCustomImageEnabled: Bool =
+        (UserDefaults.standard.object(forKey: "breakOverlayCustomImageEnabled")
+            as? Bool) ?? true
+    {
+        didSet {
+            UserDefaults.standard.set(
+                breakOverlayCustomImageEnabled,
+                forKey: "breakOverlayCustomImageEnabled"
             )
         }
     }
@@ -249,7 +264,7 @@ final class SettingsStore: ObservableObject {
     }
 
     // Focus
-    // Break Message displays on Overlay
+    // Focus Message displays on Overlay
     @Published var focusMessage: String =
         UserDefaults.standard.string(forKey: "focusMessage") ?? "Back to work!"
     {
@@ -259,7 +274,7 @@ final class SettingsStore: ObservableObject {
     }
     @Published var focusMessageVoiceEnabled: Bool =
         (UserDefaults.standard.object(forKey: "focusMessageVoiceEnabled")
-            as? Bool) ?? true
+            as? Bool) ?? false
     {
         didSet {
             UserDefaults.standard.set(
@@ -268,6 +283,8 @@ final class SettingsStore: ObservableObject {
             )
         }
     }
+    @Published var focusMessageVoiceID: String? = nil
+    
     // Focus overlay (at end of break)
     @Published var focusOverlayEnabled: Bool =
         (UserDefaults.standard.object(forKey: "focusOverlayEnabled") as? Bool)
@@ -277,6 +294,18 @@ final class SettingsStore: ObservableObject {
             UserDefaults.standard.set(
                 focusOverlayEnabled,
                 forKey: "focusOverlayEnabled"
+            )
+        }
+    }
+    // Custom Focus Overlay Image
+    @Published var focusOverlayCustomImageEnabled: Bool =
+        (UserDefaults.standard.object(forKey: "focusOverlayCustomImageEnabled")
+            as? Bool) ?? true
+    {
+        didSet {
+            UserDefaults.standard.set(
+                focusOverlayCustomImageEnabled,
+                forKey: "focusOverlayCustomImageEnabled"
             )
         }
     }

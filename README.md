@@ -7,7 +7,7 @@
 <p align="center">
   ⏳ A beautiful, native macOS Pomodoro timer with full-screen visual disruptions
 </p>
-The main feature of this pomodoro timer is that it creates a **visual disruption** for those who have become deaf to the monotony of alarms. The entire screen of all connected monitors will display an overlay to disrupt your current work.
+The main feature of this pomodoro timer is that it creates a **visual disruption** for those who have become deaf to the monotony of alarms. All monitors will display an overlay to disrupt your current work.
 
 ## Table of Contents
 - [Screenshots](#screenshots)
@@ -22,9 +22,12 @@ The main feature of this pomodoro timer is that it creates a **visual disruption
 
 ## Screenshots
 <p align="center">
-  <img src="./docs/screenshots/main_view.png" alt="Pomodoro Screen Timer Main View"/>
-  <img src="./docs/screenshots/menu_bar_menu.png" alt="Pomodoro Screen Timer Menu Bar"/>
-  <img src="./docs/screenshots/settings.png" alt="Pomodoro Screen Timer Settings"/>
+  <img src="./docs/screenshots/main_view.png" alt="Pomodoro Screen Timer Main View"/><br/>
+  <img src="./docs/screenshots/menu_bar_menu.png" alt="Pomodoro Screen Timer Menu Bar"/><br/>
+  <img src="./docs/screenshots/settings_timer.png" alt="Pomodoro Screen Timer Timer Settings"/><br/>
+  <img src="./docs/screenshots/settings_overlay.png" alt="Pomodoro Screen Timer Overlay Settings"/><br/>
+  <img src="./docs/screenshots/settings_sound.png" alt="Pomodoro Screen Timer Sound Settings"/><br/>
+  <img src="./docs/screenshots/overlay_focus.png" alt="Pomodoro Screen Timer Focus"/>
 </p>
 
 
@@ -42,17 +45,20 @@ The main feature of this pomodoro timer is that it creates a **visual disruption
 - **Visual Progress Ring**: Modern circular progress indicator with phase-specific colors.
 - **Auto-Cycling**: Automatically transitions between focus and break sessions.
 - **Manual Control**: Option to manually start each session.
+- **Cycle Count Tracking**: Displays the number of focus and break sessions since the app has been up.
 
 ### Visual & Audio
 - **Multi-monitor Full-Screen Overlays**: Customizable break and focus overlays with images to visually disrupt your current work to signal a transition to a break or focus session.
 - **Phase-Specific Colors**: 🟢 Green for focus, 🔴 Red for breaks.
 - **Custom Sounds**: Set different alarm sounds for focus and break transitions.
+- **Voice Alert**: Voice alerts via speaking the message on the overlay for focus and break transitions. (optional)
 
 ### Customization
 - **Flexible Timing**: Adjustable focus (default 25min), short break (5min), and long break (15min) durations.
 - **Long Break Cycles**: Configure how many focus sessions before a long break.
 - **Overlay Customization**: Custom images, colors, and display durations for notification overlays.
 - **Sound Options**: Choose from system sounds or custom audio files.
+- **Voice Options**: Choose from system voices to read out the message on the overlay. 
 - **Startup Options**: Launch at login.
 
 ### Developer Features
@@ -68,7 +74,7 @@ The main feature of this pomodoro timer is that it creates a **visual disruption
 
 ## Installation
 
-### Option 1: Build from Source
+### Build from Source
 
 1. **Clone the repository**:
    ```bash
@@ -82,10 +88,23 @@ The main feature of this pomodoro timer is that it creates a **visual disruption
    ./build_and_run.sh
    ```
 
-3. **Or build manually with Xcode**:
+    **Or build manually with Xcode**:
    - Open `Pomodoro Screen Timer.xcodeproj` in Xcode.
    - Select the "Pomodoro Screen Timer" scheme.
+   - Selet `My Mac` as the target device.
    - Build and run (⌘R).
+
+3. **Copy built app to `/Applications` folder**
+   1. Go into the build folder 
+
+        **Via build script**
+        - `<project root>/build/Build`.
+
+        **Via Xcode**
+       - Go into the build folder via `Product -> Show Build Folder in Finder` in Xcode.
+
+   2. Copy the `"Products/Debug/Pomodoro Screen Timer.app"` or `"Products/Release/Pomodoro Screen Timer.app"` to `/Applications`.
+
 
 ### Build Script Options
 
@@ -101,6 +120,7 @@ The included `build_and_run.sh` script provides several convenient options:
 ```
 
 ## Usage
+
 
 ### Getting Started
 
@@ -136,31 +156,58 @@ The menu bar provides quick access to:
 ## Architecture
 
 The app follows a clean, modular architecture:
-
 ```
-Models/
-├── Phase.swift          # Phase enum with colors and properties
-├── TimerModel.swift     # Core timer logic and state management
-├── SettingsStore.swift  # User preferences and configuration
-└── AlarmPlayer.swift    # Audio playback for notifications
+Core
+├── AlarmHandle.swift
+├── OverlayConfig.swift
+├── OverlayController.swift
+├── Phase.swift
+├── SettingsStore.swift
+└── TimerModel.swift
 
-Views/
-├── MainView.swift       # Main timer interface
-├── SettingsView.swift   # Settings configuration
-├── ProgressRingView.swift # Circular progress indicator
-├── OverlayView.swift    # Full-screen overlays
-└── MenuBar/             # Menu bar components
+Extensions
+└── Comparable+Extensions.swift
 
-Controllers/
-└── OverlayController.swift # Overlay logic
+Services
+├── AlarmPlayer.swift
+├── AppLifecycle.swift
+├── LoginItemManager.swift
+├── Persistence.swift
+├── SpeechSynthesizer.swift
+└── SystemSounds.swift
 
-Utils/
-├── AppLifecycle.swift   # App lifecycle managemen
-└── Various helpers      # File selection, system integration
+Utils
+├── FileSelectionHelper.swift
+├── OverlayNSWindow.swift
+└── WindowBehaviorConfigurator.swift
+
+Views
+├── ContentView.swift
+├── MainView.swift
+├── MenuBar
+│   ├── MenuBarStatusLabelView.swift
+│   ├── MenuBarView.swift
+│   └── StatusImage.swift
+├── OverlayView.swift
+├── ProgressRingView.swift
+└── Settings
+    ├── Components
+    │   ├── AlarmTestButton.swift
+    │   ├── DurationRow.swift
+    │   ├── ImagePickerRow.swift
+    │   ├── OverlaySection.swift
+    │   ├── SettingsGridRow.swift
+    │   ├── SoundPickerSection.swift
+    │   └── VoicePicker.swift
+    ├── SettingsView.swift
+    └── Tabs
+        ├── OverlaySettingsTab.swift
+        ├── SoundSettingsTab.swift
+        ├── StartupSettingsTab.swift
+        └── TimerSettingsTab.swift
 ```
 
 ### Key Components
-
 - **Phase Model**: Centralized phase management with consistent colors and properties.
 - **Timer Model**: Observable timer state with automatic phase transitions.
 - **Settings Store**: Persistent user preferences with real-time updates.

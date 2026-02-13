@@ -5,7 +5,7 @@
 
 set -e  # Exit on any error
 
-PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PROJECT_NAME="Pomodoro Screen Timer"
 SCHEME_NAME="Pomodoro Screen Timer"
 BUILD_DIR="$PROJECT_DIR/build"
@@ -58,6 +58,10 @@ build_project() {
     
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Build successful!${NC}"
+
+        APP_PATH="$BUILD_DIR/Build/Products/$config/$PROJECT_NAME.app"
+        echo -ne "${BLUE}App Location: ${NC}"
+        echo -e "$APP_PATH"
         return 0
     else
         echo -e "${RED}❌ Build failed! Trying with development signing...${NC}"
@@ -73,6 +77,10 @@ build_project() {
         
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}✅ Build successful with development signing!${NC}"
+
+            APP_PATH="$BUILD_DIR/Build/Products/$config/$PROJECT_NAME.app"
+            echo -ne "${BLUE}App Location: ${NC}"
+            echo -e "$APP_PATH"
             return 0
         else
             echo -e "${RED}❌ Build failed even with development signing!${NC}"
@@ -88,6 +96,8 @@ run_app() {
     local app_path="$BUILD_DIR/Build/Products/$config/$PROJECT_NAME.app"
     
     if [ -d "$app_path" ]; then
+        echo -e "${BLUE} Opening '$app_path'"
+        echo ""
         echo -e "${BLUE}🚀 Launching $PROJECT_NAME...${NC}"
         open "$app_path"
     else
@@ -123,6 +133,9 @@ case "${1:-build}" in
     "clean-files")
         clean_problematic_files
         ;;
+    "debug")
+        build_project "Debug"
+        ;;
     "release")
         build_project "Release"
         ;;
@@ -140,7 +153,7 @@ case "${1:-build}" in
         echo ""
         echo "Commands:"
         echo "  build-and-run  Build (Debug) and run the app (default)"
-        echo "  build          Build the app (Debug configuration)"
+        echo "  debug          Build the app (Debug configuration)"
         echo "  release        Build the app (Release configuration)"
         echo "  run            Run the previously built app"
         echo "  clean          Clean the build directory"

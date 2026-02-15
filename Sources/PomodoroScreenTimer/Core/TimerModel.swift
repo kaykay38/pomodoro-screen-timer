@@ -22,10 +22,6 @@ final class TimerModel: ObservableObject {
     @Published var completedShortBreakCount: Int = 0
     @Published var completedLongBreakCount: Int = 0
 
-    var completedBreakCount: Int {
-        completedShortBreakCount + completedLongBreakCount
-    }
-
     let settings: SettingsStore
     private var timer: DispatchSourceTimer?
 

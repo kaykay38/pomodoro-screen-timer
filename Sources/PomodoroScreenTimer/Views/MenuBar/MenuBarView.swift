@@ -13,56 +13,49 @@ struct MenuBarView: View {
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
-        Group {
-            Button(model.isRunning ? "Pause" : "Start") { model.toggleStartStop() }
-                .keyboardShortcut(.space, modifiers: [])
 
-            Button("Stop") { model.stop() }
-                .disabled(!model.isRunning)
-                .keyboardShortcut("s", modifiers: .command)
-
-            Divider()
-
-            Button("Reset to Focus") { model.resetToFocus() }
-            Button("Reset to Break") { model.resetToBreak() }
-
-            Divider()
-
-            Button("Show App") {
-                openWindow(id: "main")     // ← the exact same window definition as startup
-            }
-            .keyboardShortcut("o", modifiers: .command)
-
-            Divider()
-            
-            Button {} label: {
-                HStack {
-                    Text("Focus:   \(model.completedFocusCount)")
-                        .monospacedDigit()
-                }
-            }
-            .buttonStyle(.plain)
-            .allowsHitTesting(false)
-
-            Button {} label: {
-                HStack {
-                    Text("Breaks:  \(model.completedBreakCount)")
-                        .monospacedDigit()
-                }
-            }
-            .buttonStyle(.plain)
-            .allowsHitTesting(false)
-
-            Divider()
-            
-            SettingsLink { Text("Settings…") }
-                .keyboardShortcut(",", modifiers: .command)
-            
-            Divider()
-
-            Button("Quit") { NSApp.terminate(nil) }
-                .keyboardShortcut("q", modifiers: .command)
+        Button(model.isRunning ? "Pause" : "Start") {
+            model.toggleStartStop()
         }
-        .frame(minWidth: 180)
+        .keyboardShortcut(.space, modifiers: [])
+
+        Button("Stop") { model.stop() }
+            .disabled(!model.isRunning)
+            .keyboardShortcut("s", modifiers: .command)
+
+        Divider()
+
+        Button("Reset to Focus") { model.resetToFocus() }
+        Button("Reset to Break") { model.resetToBreak() }
+
+        Divider()
+
+        Button("Show App") {
+            openWindow(id: "main")
+            NSApp.activate(ignoringOtherApps: true)  // Brings the window to the front
+        }
+        .keyboardShortcut("o", modifiers: .command)
+
+        Divider()
+
+        Section("Session Stats") {
+            Text("Focus:   \(model.completedFocusCount)")
+                .monospacedDigit()
+            Text("Short Breaks:  \(model.completedShortBreakCount)")
+                .monospacedDigit()
+            Text("Long Breaks:  \(model.completedLongBreakCount)")
+                .monospacedDigit()
+        }
+
+        Divider()
+
+        SettingsLink { Text("Settings…") }
+            .keyboardShortcut(",", modifiers: .command)
+
+        Divider()
+
+        Button("Quit") { NSApp.terminate(nil) }
+            .keyboardShortcut("q", modifiers: .command)
+
     }
 }

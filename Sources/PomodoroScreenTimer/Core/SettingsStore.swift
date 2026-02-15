@@ -164,7 +164,15 @@ final class SettingsStore: ObservableObject {
             )
         }
     }
-    @Published var breakMessageVoiceID: String? = nil
+    @Published var breakMessageVoiceID: String? = 
+        UserDefaults.standard.string(forKey: "breakMessageVoiceID")
+        ?? nil
+    {
+        didSet {
+            UserDefaults.standard.set(breakMessageVoiceID, forKey: "breakMessageVoiceID")
+        }
+    }
+
 
     // Break overlay
     @Published var breakOverlayEnabled: Bool =
@@ -283,8 +291,15 @@ final class SettingsStore: ObservableObject {
             )
         }
     }
-    @Published var focusMessageVoiceID: String? = nil
-    
+    @Published var focusMessageVoiceID: String? = 
+        UserDefaults.standard.string(forKey: "focusMessageVoiceID")
+        ?? nil
+    {
+        didSet {
+            UserDefaults.standard.set(focusMessageVoiceID, forKey: "focusMessageVoiceID")
+        }
+    }
+
     // Focus overlay (at end of break)
     @Published var focusOverlayEnabled: Bool =
         (UserDefaults.standard.object(forKey: "focusOverlayEnabled") as? Bool)

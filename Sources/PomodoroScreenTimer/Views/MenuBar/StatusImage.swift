@@ -5,91 +5,67 @@
 //  Created by Mia on 9/20/25.
 //
 
-#if os(macOS)
 import AppKit
 
 struct StatusAppearance {
     let phase: Phase
     let remaining: Int
     
-    // Tunables
-    var fontSize: CGFloat = 13                    // system-ish size for menu bar
+    // Instead of a fixed font size, we use a ratio of the bar height
+    var textScale: CGFloat = 0.65  // 65% of bar height
+    var iconScale: CGFloat = 0.75  // 75% of bar height
+    
     var fontWeight: NSFont.Weight = .semibold
-    var colorizeText: Bool = true                 // color timer text by phase
-    
-    var iconName: String = "timer"                // looks bigger than "timer.circle.fill"
+    var colorizeText: Bool = true
+    var iconName: String = "timer"
     var iconWeight: NSFont.Weight = .bold
-    /// If nil, we’ll auto-fit icon to status bar height with your padding.
-    var iconPointSize: CGFloat? = nil
     
-    // Layout
-    var padding = NSEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
-    var spacing: CGFloat = 1
-    var iconHorizontalTrim: CGFloat = 0   // trim left right padding
-    var fixedTemplate: String = "10:00"   // locks width for no jiggle
+    var padding = NSEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
+    var spacing: CGFloat = 2
 }
 
 func makeStatusImage(_ a: StatusAppearance) -> NSImage {
-    // 1) Status bar height cap (don’t exceed or the system scales you down)
-    let barH = NSStatusBar.system.thickness       // ~22pt on modern macOS
-    let contentH = max(1, barH - (a.padding.top + a.padding.bottom))
-
-    // 2) Font sized to fit content height (monospaced digits, system look)
-    let fittedFontSize = min(a.fontSize, contentH)  // don’t exceed content height
-    let font = NSFont.monospacedDigitSystemFont(ofSize: fittedFontSize, weight: a.fontWeight)
-
-    // 3) Text
-    let mins = a.remaining / 60, secs = a.remaining % 60
-    let text = "\(String(format: "%02d:%02d", mins, secs))"
-    let phaseColor = a.phase.nsColor
-    let textColor: NSColor = a.colorizeText ? phaseColor : .labelColor
-    let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: textColor]
-
-    // Fixed text width from template
-    let fixedTextSize = (a.fixedTemplate as NSString).size(withAttributes: attrs)
-
-    // 4) Icon sized to content height (slightly less so it doesn’t clip)
-    let desiredIconPt = a.iconPointSize ?? (contentH)   // fill available height
-    let iconCfg = NSImage.SymbolConfiguration(pointSize: desiredIconPt, weight: a.iconWeight)
-    // Palette/hierarchical; use palette for two-tone or hierarchical for single-tone
-    let pal = NSImage.SymbolConfiguration(paletteColors: [phaseColor, phaseColor.withAlphaComponent(0.25)])
-    let base = NSImage(systemSymbolName: a.iconName, accessibilityDescription: nil)?
-        .withSymbolConfiguration(iconCfg)?
-        .withSymbolConfiguration(pal)
-    let iconSize = base?.size ?? NSSize(width: desiredIconPt, height: desiredIconPt)
-    let visualIconWidth = max(1, iconSize.width - a.iconHorizontalTrim * 2)
+    let barH = NSStatusBar.system.thickness
     
-    // 5) Canvas sized exactly to status bar (prevents OS downscaling)
-    let totalW = a.padding.left
-               + visualIconWidth
-               + a.spacing
-               + fixedTextSize.width
-               + a.padding.right
+    // Calculate dynamic sizes based on the CURRENT bar height
+    let dynamicFontSize = barH * a.textScale
+    let dynamicIconSize = barH * a.iconScale
+    
+    let font = NSFont.monospacedDigitSystemFont(ofSize: dynamicFontSize, weight: a.fontWeight)
+    
+    let mins = a.remaining / 60, secs = a.remaining % 60
+    let text = String(format: "%02d:%02d", mins, secs)
+    let phaseColor = a.phase.nsColor
+    
+    let attrs: [NSAttributedString.Key: Any] = [
+        .font: font,
+        .foregroundColor: a.colorizeText ? phaseColor : .labelColor
+    ]
 
-    let size = NSSize(width: ceil(totalW), height: ceil(barH))
-    let img = NSImage(size: size)
+    // Use a template to fix the width so the menu bar doesn't "jump"
+    let templateWidth = ("00:00" as NSString).size(withAttributes: attrs).width
+    let iconCfg = NSImage.SymbolConfiguration(pointSize: dynamicIconSize, weight: a.iconWeight)
+    let pal = NSImage.SymbolConfiguration(paletteColors: [phaseColor, phaseColor.withAlphaComponent(0.3)])
+    
+    guard let base = NSImage(systemSymbolName: a.iconName, accessibilityDescription: nil)?
+        .withSymbolConfiguration(iconCfg)?
+        .withSymbolConfiguration(pal) else { return NSImage() }
+
+    let iconSize = base.size
+    let totalW = a.padding.left + iconSize.width + a.spacing + templateWidth + a.padding.right
+    
+    let img = NSImage(size: NSSize(width: ceil(totalW), height: barH))
     img.lockFocus()
 
-    // Baseline Y so icon/text are vertically centered in the bar
-    let iconY = (size.height - iconSize.height)/2
-    let textY = (size.height - fixedTextSize.height)/2
+    // Perfect vertical centering
+    let iconY = (barH - iconSize.height) / 2
+    let textY = (barH - font.ascender + font.descender) / 2 // Better optical centering for text
 
-    // Draw icon
-    if let base {
-        base.draw(in: NSRect(
-            x: a.padding.left - a.iconHorizontalTrim,
-            y: iconY,
-            width: visualIconWidth,
-            height: iconSize.height
-        ))
-    }
-
-    // Draw fixed-width text (no jiggle)
-    let textX = a.padding.left + visualIconWidth + a.spacing
-    (text as NSString).draw(at: NSPoint(x: textX, y: textY), withAttributes: attrs)
+    base.draw(in: NSRect(x: a.padding.left, y: iconY, width: iconSize.width, height: iconSize.height))
+    
+    // Draw text centered in its reserved template space
+    (text as NSString).draw(at: NSPoint(x: a.padding.left + iconSize.width + a.spacing, y: textY), withAttributes: attrs)
 
     img.unlockFocus()
-    img.isTemplate = false
     return img
 }
-#endif

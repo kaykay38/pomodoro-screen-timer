@@ -11,22 +11,18 @@ struct MenuBarStatusLabel: View {
     @EnvironmentObject var model: TimerModel
 
     var body: some View {
-        #if os(macOS)
         let appearance = StatusAppearance(
             phase: model.phase,
             remaining: model.remaining,
-            fontSize: 15,                 // try 15–16 for “bigger”
+            textScale: 0.70,  // 65% of bar height
+            iconScale: 1,  // 100% of bar height
             fontWeight: .semibold,
             colorizeText: true,           // phase-colored timer text
             iconName: "timer",
             iconWeight: .bold,
-            padding: .init(top: 1, left: 0, bottom: 1, right: 0), // tighter padding
-            fixedTemplate: "10:00"     // keeps width static
+            padding: .init(top: 0, left: 0, bottom: 0, right: 0), // tighter padding
         )
         Image(nsImage: makeStatusImage(appearance))
             .renderingMode(.original)
-        #else
-        EmptyView()
-        #endif
     }
 }

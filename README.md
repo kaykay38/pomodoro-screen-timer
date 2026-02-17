@@ -84,8 +84,8 @@ The main feature of this pomodoro timer is that it creates a **visual disruption
 
 2. **Build and run using the provided script**:
    ```bash
-   chmod +x build_and_run.sh
-   ./build_and_run.sh
+   chmod +x scripts/build_and_run.sh
+   ./scripts/build_and_run.sh
    ```
 
     **Or build manually with Xcode**:
@@ -112,7 +112,7 @@ The included `build_and_run.sh` script provides several convenient options:
 
 ```bash
 ./build_and_run.sh                # Build (Debug) and run (default)
-./build_and_run.sh build          # Build Debug configuration only
+./build_and_run.sh debug          # Build Debug configuration only
 ./build_and_run.sh release        # Build Release configuration
 ./build_and_run.sh run            # Run previously built app
 ./build_and_run.sh clean          # Clean build directory
